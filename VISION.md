@@ -3,7 +3,7 @@
 > The foundational document for the project. Every later phase — architecture, repository, templates, standards, factory, skills, workflows, docs, automation, release — must trace back to this file. When in doubt, this document wins.
 
 **Status:** Canonical · Phase 1 · v0.1.0
-**Owner:** Chief Architect
+**Owner:** Srikanth Manivannan
 **Last updated:** 2026-06-25
 
 ---

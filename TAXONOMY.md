@@ -6,7 +6,7 @@
 > consumes this as its build queue, honoring "build dependencies first" (§8).
 
 **Status:** Canonical · Phase 6 · v0.1.0
-**Owner:** Chief Architect
+**Owner:** Srikanth Manivannan
 **Last updated:** 2026-06-25
 **Counts:** 22 categories · **166 seed skills** (≥150 target met).
 

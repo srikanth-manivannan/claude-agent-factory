@@ -140,4 +140,4 @@ the same for everyone. Start with the [Contributor Guide](docs/guides/contributo
 
 ## License
 
-[MIT](LICENSE) © Claude Agent Factory contributors. Inbound = outbound.
+[MIT](LICENSE) © Srikanth Manivannan. Inbound = outbound.

@@ -17,7 +17,7 @@ status: active
 maturity: gold
 runtime: claude
 license: MIT
-author: "@claude-agent-factory"
+author: "Srikanth Manivannan"
 created: "2026-06-26"
 updated: "2026-06-26"
 dependencies: []

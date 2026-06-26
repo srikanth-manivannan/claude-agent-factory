@@ -20,7 +20,7 @@ require_kebab() {
 
 today()        { date +%F; }
 min_standard() { cat "$ROOT/standards/VERSION" 2>/dev/null || echo "0.1.0"; }
-author()       { echo "${FACTORY_AUTHOR:-@your-handle}"; }
+author()       { echo "${FACTORY_AUTHOR:-Srikanth Manivannan}"; }
 
 # kebab-case -> Title Case (portable, no GNU sed extensions)
 titlecase() {

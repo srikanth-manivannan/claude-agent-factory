@@ -6,7 +6,7 @@
 > disagree, VISION wins, then ARCHITECTURE, then this file.
 
 **Status:** Canonical · Phase 5 · v0.1.0
-**Owner:** Chief Architect
+**Owner:** Srikanth Manivannan
 **Last updated:** 2026-06-25
 **Implements:** VISION (quality bar §6–7, versioning §12, expansion §15) and
 ARCHITECTURE (deterministic `generators/` §9, `templates/blocks/` §8, runtime seam §19).

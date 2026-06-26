@@ -3,7 +3,7 @@
 > The canonical structural specification for the repository. It **implements** `VISION.md` — specifically the naming policy (§11), two-layer versioning (§12), and the Claude-first/pluggable expansion seam (§15.2). Where this document and VISION disagree, VISION wins and this file is a bug.
 
 **Status:** Canonical · Phase 2 · v0.1.0
-**Owner:** Chief Architect
+**Owner:** Srikanth Manivannan
 **Last updated:** 2026-06-25
 **Designed for:** thousands of concurrent contributors.
 

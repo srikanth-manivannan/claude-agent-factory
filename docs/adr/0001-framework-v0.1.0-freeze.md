@@ -1,6 +1,6 @@
 # ADR 0001 — Framework v0.1.0 Freeze
 
-**Status:** Accepted · **Date:** 2026-06-26 · **Owner:** Chief Architect
+**Status:** Accepted · **Date:** 2026-06-26 · **Owner:** Srikanth Manivannan
 **Implements / depends on:** [VISION](../../VISION.md), [ARCHITECTURE](../../ARCHITECTURE.md),
 [FACTORY](../../FACTORY.md), [standards](../../standards/).
 

@@ -6,7 +6,7 @@
 > Factory (FACTORY.md) builds these only after their composed skills exist (§8).
 
 **Status:** Canonical · Phase 7 · v0.1.0
-**Owner:** Chief Architect
+**Owner:** Srikanth Manivannan
 **Last updated:** 2026-06-25
 **Counts:** 8 lifecycle stages · **54 workflows** (≥50 target met) · 10 flagships scaffolded.
 

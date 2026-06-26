@@ -11,7 +11,7 @@
 
 ## Self-review result (v0.1.0)
 
-**Reviewer:** Factory (generation self-review) · **Date:** 2026-06-26 · **Standard:** 0.1.0
+**Reviewer:** Srikanth Manivannan (generation self-review) · **Date:** 2026-06-26 · **Standard:** 0.1.0
 
 **Verdict:** ✅ Approve — no open 🔴/🟠.
 

@@ -9,7 +9,7 @@ min_standard: 0.1.0
 status: active
 runtime: claude
 license: MIT
-author: "@claude-agent-factory"
+author: "Srikanth Manivannan"
 created: "2026-06-26"
 updated: "2026-06-26"
 composes:
