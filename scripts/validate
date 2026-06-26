@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+# The full validation gate. Runs the same checks CI runs (scripts/validate == CI).
+# Order: placeholders (pure shell) -> lint (pure shell) -> schema+links (Python adapter).
+# Pending references are warnings; structural/schema errors and cycles fail.
+. "$(dirname -- "$0")/lib/common.sh"
+
+rc=0
+info "== check-placeholders =="
+sh "$ROOT/scripts/check-placeholders" || rc=1
+info ""
+info "== lint =="
+sh "$ROOT/scripts/lint" || rc=1
+info ""
+info "== schema + links =="
+PY=$(find_python) || PY=""
+if [ -n "$PY" ]; then
+  "$PY" "$ROOT/scripts/lib/factory.py" validate || rc=1
+else
+  warn "Python not found — schema + link validation SKIPPED."
+  warn "Structure/placeholder checks passed in pure shell; install Python 3 +"
+  warn "'pip install pyyaml jsonschema referencing' for the full gate."
+fi
+
+info ""
+if [ "$rc" -eq 0 ]; then
+  ok "validate: ALL CHECKS PASSED"
+else
+  err "validate: FAILURES PRESENT"
+fi
+exit "$rc"

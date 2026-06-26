@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: prompt-engineer
+title: Prompt Engineer
+description: Use this to design or refine a production prompt with an explicit contract, structure, and rationale.
+type: skill
+category: ai
+tags: [ai, llm, prompt-engineering, prompts]
+tech_profile:
+  technology: LLM application
+  language: n/a
+  stack: any model API
+  toolchain: any
+  domain: ai
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+maturity: gold
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies: []

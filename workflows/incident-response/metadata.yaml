@@ -1,0 +1,18 @@
+name: incident-response
+title: Incident Response
+description: Detect, mitigate, communicate, and run a postmortem for a production incident.
+type: workflow
+version: 0.1.0
+min_standard: 0.1.0
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-25"
+updated: "2026-06-25"
+tags: [incident, operations, sre, postmortem]
+status: active
+composes:
+  skills:
+    - { name: devops/observability-instrumenter, min_version: 0.1.0 }
+    - { name: devops/incident-runbook-builder, min_version: 0.1.0 }
+    - { name: leadership/stakeholder-comms-writer, min_version: 0.1.0 }

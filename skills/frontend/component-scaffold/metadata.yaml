@@ -1,0 +1,24 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: component-scaffold
+title: Component Scaffold
+description: Use this to scaffold an accessible, tested UI component with markup, state, and tests.
+type: skill
+category: frontend
+tags: [frontend, component, ui, scaffold, accessibility]
+tech_profile:
+  technology: UI component
+  language: any
+  stack: any
+  toolchain: any
+  domain: frontend
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+maturity: gold
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies:
+  - { name: testing/unit-test-generator, min_version: 0.1.0 }

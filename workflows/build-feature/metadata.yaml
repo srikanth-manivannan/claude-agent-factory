@@ -1,0 +1,21 @@
+name: build-feature
+title: Build Feature
+description: Take a planned feature from spec to a tested, documented, review-ready PR.
+type: workflow
+version: 0.1.0
+min_standard: 0.1.0
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-25"
+updated: "2026-06-25"
+tags: [build, feature, full-stack, delivery]
+status: active
+composes:
+  skills:
+    - { name: backend/rest-endpoint-scaffold, min_version: 0.1.0 }
+    - { name: frontend/component-scaffold, min_version: 0.1.0 }
+    - { name: testing/unit-test-generator, min_version: 0.1.0 }
+    - { name: documentation/doc-writer, min_version: 0.1.0 }
+  workflows:
+    - { name: plan-feature, min_version: 0.1.0 }

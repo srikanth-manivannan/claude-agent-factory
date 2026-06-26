@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: code-review-coach
+title: Code Review Coach
+description: Use this to produce constructive, standards-based code reviews.
+type: skill
+category: leadership
+tags: [leadership]
+tech_profile:
+  technology: any
+  language: any
+  stack: any
+  toolchain: any
+  domain: leadership
+version: 0.1.0
+min_standard: 0.1.0
+status: draft
+maturity: baseline
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies: []

@@ -1,0 +1,214 @@
+#!/usr/bin/env sh
+# Scaffold a gold-standard skill: skills/<category>/<name>/ with the canonical
+# 9-file structure, standards-compliant and schema-valid out of the box.
+# Usage: new-skill <category> <name> ["one-sentence description"]
+. "$(dirname -- "$0")/../lib/common.sh"
+
+[ "$#" -ge 2 ] || die "usage: new-skill <category> <name> [\"description\"]"
+CAT=$1; NAME=$2; DESC=${3:-"Use this to TODO describe the capability in one action-oriented sentence."}
+require_kebab "$CAT"; require_kebab "$NAME"
+
+DEST="$ROOT/skills/$CAT/$NAME"
+ensure_new_dir "$DEST"; mkdir -p "$DEST/tests"
+TITLE=$(titlecase "$NAME"); VER=0.1.0; MS=$(min_standard); DATE=$(today); AUTH=$(author)
+
+[ -f "$ROOT/skills/$CAT/README.md" ] || warn "category '$CAT' has no README — run: generators/bin/new-category $CAT"
+
+cat > "$DEST/SKILL.md" <<EOF
+---
+name: $NAME
+description: $DESC
+version: $VER
+category: $CAT
+runtime: claude
+min_standard: $MS
+license: MIT
+tags: [$CAT]
+---
+
+# $TITLE
+
+> $DESC
+
+> **Tech profile** — Technology: any · Language: any · Stack: any · Toolchain: any · Domain: $CAT
+
+## When to use this skill
+- TODO: concrete trigger.
+
+## When NOT to use this skill
+- TODO: point to the alternative.
+
+## Inputs
+| Input | Required | Description |
+|-------|----------|-------------|
+| TODO | yes | TODO |
+
+## Instructions
+1. TODO: imperative, ordered steps. Reference /standards where relevant.
+
+## Output
+TODO: exact output shape.
+
+## Constraints & safety
+- Conforms to /standards/security.md and /standards/prompt-engineering.md.
+
+## Examples
+Minimal here; full examples in [EXAMPLES.md](EXAMPLES.md).
+EOF
+
+cat > "$DEST/metadata.yaml" <<EOF
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: $NAME
+title: $TITLE
+description: $DESC
+type: skill
+category: $CAT
+tags: [$CAT]
+tech_profile:
+  technology: any
+  language: any
+  stack: any
+  toolchain: any
+  domain: $CAT
+version: $VER
+min_standard: $MS
+status: active
+runtime: claude
+license: MIT
+author: "$AUTH"
+created: "$DATE"
+updated: "$DATE"
+dependencies: []
+EOF
+
+cat > "$DEST/README.md" <<EOF
+# $TITLE
+
+> $DESC
+
+**Category:** $CAT · **Version:** $VER · **Runtime:** claude · **License:** MIT
+
+## What it does
+TODO.
+
+## Quickstart
+\`\`\`text
+1. Copy skills/$CAT/$NAME/ into your skills directory.
+2. TODO.
+\`\`\`
+
+## Inputs & outputs
+- **Inputs:** TODO. **Outputs:** TODO.
+
+## Customization
+TODO.
+
+## Limitations
+- TODO.
+
+## Validation & review
+- [tests/test-cases.md](tests/test-cases.md) · [REVIEW.md](REVIEW.md) · [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+
+## Future improvements
+- TODO.
+
+## Version history
+See [CHANGELOG.md](CHANGELOG.md). Current: **$VER**.
+EOF
+
+cat > "$DEST/EXAMPLES.md" <<EOF
+# Examples — $TITLE
+
+> Worked examples. See [SKILL.md](SKILL.md).
+
+## Example 1 — happy path
+**Given:** TODO **Produces:** TODO
+
+## Anti-example
+- ❌ TODO.
+EOF
+
+cat > "$DEST/TROUBLESHOOTING.md" <<EOF
+# Troubleshooting — $TITLE
+
+> Symptom → cause → fix. See [SKILL.md](SKILL.md).
+
+## Common issues
+### Symptom: TODO
+- **Cause:** TODO **Fix:** TODO
+EOF
+
+cat > "$DEST/RESOURCES.md" <<EOF
+# Resources — $TITLE
+
+## Internal references
+- **Spec:** [SKILL.md](SKILL.md).
+- **Standards:** /standards/ · **Schema:** /shared/schemas/skill.schema.yaml
+
+## Cross-linked artifacts
+| Relation | Artifact | How they connect |
+|----------|----------|------------------|
+| TODO | TODO | TODO |
+EOF
+
+cat > "$DEST/REVIEW.md" <<EOF
+# Review — $TITLE
+
+> Run the [Universal Core](../../../standards/checklists/_universal.md) first, then
+> the domain checklist(s). See /standards/review-process.md.
+
+## Self-review result ($VER)
+**Reviewer:** TODO · **Date:** $DATE · **Standard:** $MS
+**Verdict:** TODO (run \`scripts/validate\` + the checklists).
+EOF
+
+cat > "$DEST/IMPLEMENTATION.md" <<EOF
+# Implementation Guidance — $TITLE
+
+> How to apply this skill in practice. See [SKILL.md](SKILL.md) for the method and
+> [/standards/](../../../standards/) for the rules.
+
+## Build order
+1. TODO: the first concrete step.
+2. TODO.
+
+## Key decisions
+| Decision | Guidance |
+|----------|----------|
+| TODO | TODO |
+
+## Pitfalls
+- TODO.
+
+## Handing off
+- TODO: which workflow/skill consumes this skill's output.
+EOF
+
+cat > "$DEST/CHANGELOG.md" <<EOF
+# Changelog — $TITLE
+
+Format: Keep a Changelog. Versioning: SemVer (/standards/versioning.md).
+
+## [Unreleased]
+
+## [$VER] - $DATE
+### Added
+- Initial release of the \`$NAME\` skill (scaffolded by generators/bin/new-skill).
+EOF
+
+cat > "$DEST/tests/test-cases.md" <<EOF
+# Tests & Validation Guidance — $TITLE
+
+> Conforms to /standards/testing.md. Validate with \`scripts/validate\`.
+
+## Behavior cases
+### 1 — happy path
+- **Given:** TODO **When:** invoked **Then:** TODO
+### 2 — edge
+- TODO
+### 3 — failure/refusal
+- TODO
+EOF
+
+ok "Created skill: skills/$CAT/$NAME ($(ls "$DEST" | wc -l | tr -d ' ') entries)"
+say "Next: 1) fill the TODOs  2) add a row to /TAXONOMY.md  3) run: scripts/validate"

@@ -1,0 +1,42 @@
+# =============================================================================
+# workflow.schema.yaml — a repeatable sequence of engineering activities.
+# Extends metadata.schema.yaml. See /standards/architecture.md.
+# INVARIANT: a workflow orchestrates >=2 skills (Phase 7 rule).
+# =============================================================================
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://claude-agent-factory/shared/schemas/workflow.schema.yaml"
+title: Workflow Metadata
+description: Metadata for a workflow (workflows/<name>/metadata.yaml).
+
+allOf:
+  - $ref: "metadata.schema.yaml"
+
+properties:
+  type:
+    const: workflow
+  composes:
+    description: Skills (>=2) and optional agents this workflow sequences.
+    type: object
+    properties:
+      skills:
+        description: >-
+          At least TWO skills — a single-capability "workflow" should be a skill
+          (see /standards/architecture.md, composition rule 4).
+        type: array
+        minItems: 2
+        items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+      agents:
+        type: array
+        items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+      workflows:
+        description: Optional upstream workflows this one depends on.
+        type: array
+        items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+    required: [skills]
+    additionalProperties: false
+
+required:
+  - type
+  - composes
+
+unevaluatedProperties: false

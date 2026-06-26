@@ -1,0 +1,18 @@
+# Validated against /shared/schemas/agent.schema.yaml.
+name: backend-engineer
+title: Backend Engineer
+description: Use this agent to implement, persist, and test server-side features from an API contract.
+type: agent
+tags: [agent, backend, database, testing]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+uses_skills:
+  - { name: backend/openapi-designer, min_version: 0.1.0 }
+  - { name: database/schema-designer, min_version: 0.1.0 }
+  - { name: testing/unit-test-generator, min_version: 0.1.0 }

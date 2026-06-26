@@ -1,0 +1,19 @@
+name: accessibility-audit
+title: Accessibility Audit
+description: Audit a UI against WCAG and remediate accessibility issues, then verify.
+type: workflow
+version: 0.1.0
+min_standard: 0.1.0
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-25"
+updated: "2026-06-25"
+tags: [accessibility, a11y, wcag, audit]
+status: active
+composes:
+  skills:
+    - { name: accessibility/a11y-auditor, min_version: 0.1.0 }
+    - { name: accessibility/aria-annotator, min_version: 0.1.0 }
+    - { name: accessibility/color-contrast-fixer, min_version: 0.1.0 }
+    - { name: accessibility/keyboard-nav-checker, min_version: 0.1.0 }

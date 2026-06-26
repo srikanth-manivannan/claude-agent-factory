@@ -1,0 +1,52 @@
+name: 💡 New skill / artifact request
+description: Propose a new skill, workflow, agent, team, or playbook for the collection.
+title: "[skill] <category>/<name>"
+labels: ["enhancement", "skill-request", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose an addition to the collection. See the [TAXONOMY](https://github.com/srikanth-manivannan/claude-agent-factory/blob/main/TAXONOMY.md)
+        for existing/planned skills and the [Skill Author Guide](https://github.com/srikanth-manivannan/claude-agent-factory/blob/main/docs/guides/skill-author-guide.md).
+  - type: dropdown
+    id: type
+    attributes:
+      label: Artifact type
+      options: [skill, workflow, agent, team, playbook, category]
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name (kebab-case)
+      placeholder: "data/schema-designer or ship-feature"
+    validations:
+      required: true
+  - type: input
+    id: description
+    attributes:
+      label: One-sentence description
+      description: Action-oriented ("Use this to ...").
+      placeholder: "Use this to ..."
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Why is this valuable?
+      description: Who needs it and what problem does it solve?
+    validations:
+      required: true
+  - type: textarea
+    id: composition
+    attributes:
+      label: Dependencies / composition
+      description: Which existing skills/agents/workflows would it use or compose?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I checked TAXONOMY.md and this isn't already listed.
+          required: true
+        - label: I'm willing to help author or review it (optional but appreciated).

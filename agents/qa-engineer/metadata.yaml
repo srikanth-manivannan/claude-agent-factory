@@ -1,0 +1,18 @@
+# Validated against /shared/schemas/agent.schema.yaml.
+name: qa-engineer
+title: QA Engineer
+description: Use this agent to verify quality across tests, accessibility, and documentation before release.
+type: agent
+tags: [agent, quality, testing, accessibility]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+uses_skills:
+  - { name: testing/unit-test-generator, min_version: 0.1.0 }
+  - { name: accessibility/a11y-auditor, min_version: 0.1.0 }
+  - { name: documentation/doc-writer, min_version: 0.1.0 }

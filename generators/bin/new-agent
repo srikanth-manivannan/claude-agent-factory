@@ -1,0 +1,92 @@
+#!/usr/bin/env sh
+# Scaffold an agent: agents/<name>/ (AGENT.md + README + metadata + CHANGELOG).
+# An agent applies >=1 skill (schema: uses_skills minItems 1).
+# Usage: new-agent <name> [skill-id ...]   (skill-id like "testing/unit-test-generator")
+. "$(dirname -- "$0")/../lib/common.sh"
+
+[ "$#" -ge 1 ] || die "usage: new-agent <name> [skill-id ...]"
+NAME=$1; shift; require_kebab "$NAME"
+DEST="$ROOT/agents/$NAME"; ensure_new_dir "$DEST"
+TITLE=$(titlecase "$NAME"); VER=0.1.0; MS=$(min_standard); DATE=$(today); AUTH=$(author)
+DESC="Use this agent to TODO describe the role it performs."
+
+# uses_skills (>=1). Use provided skill-ids, else one TODO placeholder.
+if [ "$#" -ge 1 ]; then SKILLS="$*"; else SKILLS="TODO-replace/with-skill-id"; warn "no skills given — added a TODO placeholder (agent must use >=1 skill)"; fi
+USES=""; for s in $SKILLS; do USES="$USES    - { name: $s, min_version: $VER }
+"; done
+
+cat > "$DEST/AGENT.md" <<EOF
+---
+name: $NAME
+description: $DESC
+version: $VER
+runtime: claude
+min_standard: $MS
+license: MIT
+tags: [agent]
+---
+
+# $TITLE (Agent)
+
+> $DESC
+
+A reusable role (skill -> **agent** -> team / workflow -> playbook; /standards/architecture.md).
+
+## Role & responsibilities
+- TODO.
+
+## Skills used
+$(for s in $SKILLS; do echo "- \`$s\` (>= $VER)"; done)
+
+## Operating instructions
+1. TODO.
+
+## Constraints & safety
+- Conforms to /standards/security.md.
+EOF
+
+cat > "$DEST/metadata.yaml" <<EOF
+# Validated against /shared/schemas/agent.schema.yaml.
+name: $NAME
+title: $TITLE
+description: $DESC
+type: agent
+tags: [agent]
+version: $VER
+min_standard: $MS
+status: active
+runtime: claude
+license: MIT
+author: "$AUTH"
+created: "$DATE"
+updated: "$DATE"
+uses_skills:
+$USES
+EOF
+
+cat > "$DEST/README.md" <<EOF
+# $TITLE (Agent)
+
+> $DESC
+
+**Version:** $VER · **Runtime:** claude · **License:** MIT
+
+## What it does
+TODO. ## Skills it relies on: $(echo "$SKILLS" | tr ' ' ',').
+
+## Version history
+See [CHANGELOG.md](CHANGELOG.md).
+EOF
+
+cat > "$DEST/CHANGELOG.md" <<EOF
+# Changelog — $TITLE (Agent)
+
+## [Unreleased]
+
+## [$VER] - $DATE
+### Added
+- Initial release of the \`$NAME\` agent (scaffolded).
+EOF
+
+ok "Created agent: agents/$NAME"
+say "Next: 1) fill TODOs + real skill refs  2) run: scripts/validate"

@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: a11y-auditor
+title: Accessibility Auditor
+description: Use this to audit a UI against WCAG and report prioritized, actionable accessibility fixes.
+type: skill
+category: accessibility
+tags: [accessibility, a11y, wcag, audit, ui]
+tech_profile:
+  technology: any
+  language: any
+  stack: any
+  toolchain: any
+  domain: accessibility
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+maturity: gold
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies: []

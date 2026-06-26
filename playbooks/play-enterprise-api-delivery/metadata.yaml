@@ -1,0 +1,24 @@
+# Validated against /shared/schemas/playbook.schema.yaml.
+name: play-enterprise-api-delivery
+title: Enterprise API Delivery Pipeline
+description: Use this playbook to deliver an enterprise API from design through secure, tested production release.
+type: playbook
+tags: [playbook, pipeline, api, backend, enterprise]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  teams:
+    - { name: team-backend, min_version: 0.1.0 }
+    - { name: team-security, min_version: 0.1.0 }
+  workflows:
+    - { name: build-feature, min_version: 0.1.0 }
+    - { name: database-migration, min_version: 0.1.0 }
+    - { name: review-pr, min_version: 0.1.0 }
+    - { name: security-audit, min_version: 0.1.0 }
+    - { name: release-pipeline, min_version: 0.1.0 }

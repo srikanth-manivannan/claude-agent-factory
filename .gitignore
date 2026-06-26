@@ -1,0 +1,19 @@
+# Generated catalog (rebuild with: scripts/build-index)
+/index.json
+
+# Local Claude Code harness overrides (never commit)
+.claude/settings.local.json
+
+# Python adapter caches
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json

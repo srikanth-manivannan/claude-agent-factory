@@ -1,0 +1,22 @@
+# Machine-readable metadata. Schema of record: shared/schemas/.
+name: {{NAME}}
+title: {{TITLE}}
+description: {{DESCRIPTION}}
+type: workflow
+version: {{VERSION}}
+min_standard: {{MIN_STANDARD}}
+runtime: {{RUNTIME}}
+license: MIT
+author: {{AUTHOR}}
+created: "{{DATE}}"
+updated: "{{DATE}}"
+tags: {{TAGS}}
+status: active
+# Artifacts this workflow orchestrates (name + min version). Validated by tests/links/.
+composes:
+  agents:
+    - name: {{AGENT}}
+      min_version: {{VERSION}}
+  skills:
+    - name: {{CATEGORY}}/{{SKILL}}
+      min_version: {{VERSION}}

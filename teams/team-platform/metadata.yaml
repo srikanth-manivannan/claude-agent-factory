@@ -1,0 +1,19 @@
+# Validated against /shared/schemas/team.schema.yaml.
+name: team-platform
+title: Team Platform
+description: A coordinated team of agents that builds and secures the delivery platform.
+type: team
+tags: [team, platform, devops, cloud]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  agents:
+    - { name: platform-engineer, min_version: 0.1.0 }
+    - { name: security-engineer, min_version: 0.1.0 }
+    - { name: qa-engineer, min_version: 0.1.0 }

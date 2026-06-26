@@ -1,0 +1,17 @@
+# Validated against /shared/schemas/agent.schema.yaml.
+name: security-engineer
+title: Security Engineer
+description: Use this agent to assess and harden a system's security posture.
+type: agent
+tags: [agent, security, appsec]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+uses_skills:
+  - { name: security/secret-scanner, min_version: 0.1.0 }
+  - { name: architecture/system-design-reviewer, min_version: 0.1.0 }

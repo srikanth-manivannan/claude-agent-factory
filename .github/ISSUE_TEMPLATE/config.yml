@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Security vulnerability
+    url: https://github.com/srikanth-manivannan/claude-agent-factory/security/advisories/new
+    about: Report security issues privately — do NOT open a public issue (see SECURITY.md).
+  - name: 💬 Questions & ideas
+    url: https://github.com/srikanth-manivannan/claude-agent-factory/discussions
+    about: Ask questions or propose ideas in Discussions.

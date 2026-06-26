@@ -1,0 +1,30 @@
+name: validate
+
+# The validation gate — the same checks scripts/validate runs locally.
+# "scripts/validate == CI" (FACTORY.md, standards/review-process.md).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation adapter dependencies
+        run: pip install pyyaml jsonschema referencing
+
+      - name: Run the validation gate
+        run: sh scripts/validate
+
+      - name: Build catalog index (sanity check)
+        run: sh scripts/build-index

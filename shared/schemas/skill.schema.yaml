@@ -1,0 +1,31 @@
+# =============================================================================
+# skill.schema.yaml — a reusable capability (leaf of the hierarchy).
+# Extends metadata.schema.yaml. See /standards/architecture.md.
+# =============================================================================
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://claude-agent-factory/shared/schemas/skill.schema.yaml"
+title: Skill Metadata
+description: Metadata for a skill (skills/<category>/<name>/metadata.yaml).
+
+allOf:
+  - $ref: "metadata.schema.yaml"      # inherit all base fields + rules
+
+properties:
+  type:
+    const: skill
+  category:
+    description: REQUIRED for skills; must equal the parent category folder.
+    $ref: "metadata.schema.yaml#/$defs/slug"
+  dependencies:
+    description: Shared building blocks this skill needs. Usually empty.
+    type: array
+    items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+    default: []
+
+# Skills must declare type + category in addition to the base required fields.
+required:
+  - type
+  - category
+
+# Allow base-defined properties + the ones above; reject anything else.
+unevaluatedProperties: false

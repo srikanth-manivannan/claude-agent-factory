@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: doc-writer
+title: Doc Writer
+description: Use this to write or refresh a README and docs from code and intent, following the documentation standard.
+type: skill
+category: documentation
+tags: [documentation, readme, writing, docs]
+tech_profile:
+  technology: any
+  language: any
+  stack: any
+  toolchain: any
+  domain: documentation
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+maturity: gold
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies: []

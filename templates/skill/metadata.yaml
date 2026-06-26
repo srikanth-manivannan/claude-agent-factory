@@ -1,0 +1,18 @@
+# Machine-readable metadata. Consumed by tests/, generators/, and the catalog index.
+# Must agree with the SKILL.md frontmatter. Schema of record: shared/schemas/.
+name: {{NAME}}
+title: {{TITLE}}
+description: {{DESCRIPTION}}
+type: skill
+category: {{CATEGORY}}
+version: {{VERSION}}          # per-skill SemVer (VISION §12.2)
+min_standard: {{MIN_STANDARD}}
+runtime: {{RUNTIME}}         # the runtime seam (ARCHITECTURE §19)
+license: MIT
+author: {{AUTHOR}}
+created: "{{DATE}}"
+updated: "{{DATE}}"
+tags: {{TAGS}}
+status: active               # active | deprecated
+# References to other artifacts this skill depends on (name + min version). Usually empty.
+dependencies: []

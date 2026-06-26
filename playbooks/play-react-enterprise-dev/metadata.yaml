@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/playbook.schema.yaml.
+name: play-react-enterprise-dev
+title: React Enterprise Development Pipeline
+description: Use this playbook to deliver accessible, performant enterprise frontend features to production.
+type: playbook
+tags: [playbook, pipeline, frontend, accessibility, enterprise]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  teams:
+    - { name: team-frontend, min_version: 0.1.0 }
+  workflows:
+    - { name: build-feature, min_version: 0.1.0 }
+    - { name: accessibility-audit, min_version: 0.1.0 }
+    - { name: performance-optimization, min_version: 0.1.0 }
+    - { name: review-pr, min_version: 0.1.0 }
+    - { name: release-pipeline, min_version: 0.1.0 }

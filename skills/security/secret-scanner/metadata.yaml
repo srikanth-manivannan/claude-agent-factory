@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: secret-scanner
+title: Secret Scanner
+description: Use this to detect committed secrets and credentials and produce a safe remediation plan.
+type: skill
+category: security
+tags: [security, secrets, credentials, scanning, remediation]
+tech_profile:
+  technology: any
+  language: any
+  stack: any
+  toolchain: any
+  domain: security
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+maturity: gold
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies: []

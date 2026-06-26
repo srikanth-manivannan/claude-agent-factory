@@ -1,0 +1,20 @@
+# Validated against /shared/schemas/workflow.schema.yaml.
+name: generate-test-suite
+title: Generate Test Suite
+description: Use this workflow to produce a layered, gap-free test suite for a unit or module.
+type: workflow
+tags: [workflow, testing, quality]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  skills:
+    - { name: testing/unit-test-generator, min_version: 0.1.0 }
+    - { name: testing/coverage-gap-finder, min_version: 0.1.0 }
+    - { name: testing/test-refactorer, min_version: 0.1.0 }
+

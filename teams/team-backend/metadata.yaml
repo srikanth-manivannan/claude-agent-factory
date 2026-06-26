@@ -1,0 +1,19 @@
+# Validated against /shared/schemas/team.schema.yaml.
+name: team-backend
+title: Team Backend
+description: A coordinated team of agents that designs, builds, and quality-gates backend services.
+type: team
+tags: [team, backend]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  agents:
+    - { name: api-architect, min_version: 0.1.0 }
+    - { name: backend-engineer, min_version: 0.1.0 }
+    - { name: qa-engineer, min_version: 0.1.0 }

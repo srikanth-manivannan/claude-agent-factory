@@ -1,0 +1,38 @@
+# =============================================================================
+# playbook.schema.yaml — a higher-level operating guide that composes teams and
+# workflows to achieve a complete engineering outcome (top of the hierarchy).
+# Extends metadata.schema.yaml. See /standards/architecture.md.
+# =============================================================================
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://claude-agent-factory/shared/schemas/playbook.schema.yaml"
+title: Playbook Metadata
+description: Metadata for a playbook (playbooks/<name>/metadata.yaml).
+
+allOf:
+  - $ref: "metadata.schema.yaml"
+
+properties:
+  type:
+    const: playbook
+  composes:
+    description: The teams and workflows this playbook orchestrates.
+    type: object
+    properties:
+      teams:
+        description: Teams this playbook coordinates (>=1).
+        type: array
+        minItems: 1
+        items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+      workflows:
+        description: Workflows this playbook sequences (>=1).
+        type: array
+        minItems: 1
+        items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+    required: [teams, workflows]
+    additionalProperties: false
+
+required:
+  - type
+  - composes
+
+unevaluatedProperties: false

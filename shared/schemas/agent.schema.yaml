@@ -1,0 +1,26 @@
+# =============================================================================
+# agent.schema.yaml — an AI specialist that applies one or more skills.
+# Extends metadata.schema.yaml. See /standards/architecture.md.
+# =============================================================================
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://claude-agent-factory/shared/schemas/agent.schema.yaml"
+title: Agent Metadata
+description: Metadata for an agent (agents/<name>/metadata.yaml).
+
+allOf:
+  - $ref: "metadata.schema.yaml"
+
+properties:
+  type:
+    const: agent
+  uses_skills:
+    description: Skills this agent applies (≥1). References point down to skills.
+    type: array
+    minItems: 1
+    items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+
+required:
+  - type
+  - uses_skills
+
+unevaluatedProperties: false

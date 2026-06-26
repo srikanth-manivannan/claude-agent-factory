@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: rest-endpoint-scaffold
+title: Rest Endpoint Scaffold
+description: Use this to scaffold a REST endpoint with validation, error handling, and tests.
+type: skill
+category: backend
+tags: [backend]
+tech_profile:
+  technology: any
+  language: any
+  stack: any
+  toolchain: any
+  domain: backend
+version: 0.1.0
+min_standard: 0.1.0
+status: draft
+maturity: baseline
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies: []

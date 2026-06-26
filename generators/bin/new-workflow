@@ -1,0 +1,96 @@
+#!/usr/bin/env sh
+# Scaffold a workflow: workflows/<name>/ (WORKFLOW.md + README + metadata + CHANGELOG).
+# A workflow orchestrates >=2 skills (schema: composes.skills minItems 2).
+# Usage: new-workflow <name> [skill-id skill-id ...]
+. "$(dirname -- "$0")/../lib/common.sh"
+
+[ "$#" -ge 1 ] || die "usage: new-workflow <name> [skill-id skill-id ...]"
+NAME=$1; shift; require_kebab "$NAME"
+DEST="$ROOT/workflows/$NAME"; ensure_new_dir "$DEST"
+TITLE=$(titlecase "$NAME"); VER=0.1.0; MS=$(min_standard); DATE=$(today); AUTH=$(author)
+DESC="Use this workflow to TODO describe the outcome it delivers."
+
+# composes.skills (>=2). Pad with TODO entries if fewer than 2 given.
+set -- "$@"; SKILLS="$*"
+count=0; for s in $SKILLS; do count=$((count+1)); done
+while [ "$count" -lt 2 ]; do SKILLS="$SKILLS TODO-replace/skill-$((count+1))"; count=$((count+1)); warn "padded a TODO skill (a workflow needs >=2 skills)"; done
+LIST=""; for s in $SKILLS; do LIST="$LIST    - { name: $s, min_version: $VER }
+"; done
+
+cat > "$DEST/WORKFLOW.md" <<EOF
+---
+name: $NAME
+description: $DESC
+version: $VER
+runtime: claude
+min_standard: $MS
+license: MIT
+tags: [workflow]
+---
+
+# $TITLE (Workflow)
+
+> $DESC
+
+A repeatable sequence of activities composing >=2 skills (/standards/architecture.md).
+
+## Outcome
+TODO: the state of the world after a successful run.
+
+## Composition
+$(for s in $SKILLS; do echo "- \`skill:$s\` (>= $VER)"; done)
+
+## Steps
+1. TODO.
+2. TODO.
+
+## Failure handling
+- TODO.
+EOF
+
+cat > "$DEST/metadata.yaml" <<EOF
+# Validated against /shared/schemas/workflow.schema.yaml.
+name: $NAME
+title: $TITLE
+description: $DESC
+type: workflow
+tags: [workflow]
+version: $VER
+min_standard: $MS
+status: active
+runtime: claude
+license: MIT
+author: "$AUTH"
+created: "$DATE"
+updated: "$DATE"
+composes:
+  skills:
+$LIST
+EOF
+
+cat > "$DEST/README.md" <<EOF
+# $TITLE (Workflow)
+
+> $DESC
+
+**Version:** $VER · **Runtime:** claude · **License:** MIT
+
+## What it does
+TODO. ## Composes: $(echo "$SKILLS" | tr ' ' ',').
+
+## Version history
+See [CHANGELOG.md](CHANGELOG.md).
+EOF
+
+cat > "$DEST/CHANGELOG.md" <<EOF
+# Changelog — $TITLE (Workflow)
+
+## [Unreleased]
+
+## [$VER] - $DATE
+### Added
+- Initial release of the \`$NAME\` workflow (scaffolded).
+EOF
+
+ok "Created workflow: workflows/$NAME"
+say "Next: 1) replace TODO skills with real ids (>=2)  2) add a row to /WORKFLOWS.md  3) run: scripts/validate"

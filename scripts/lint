@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+# Structural lint: required files, folder/name match, kebab-case naming.
+# Pure shell (no runtime). Deeper checks (schema, links) live in scripts/validate.
+. "$(dirname -- "$0")/lib/common.sh"
+
+errors=0
+kebab='^[a-z0-9]+(-[a-z0-9]+)*$'
+
+spec_for() { # $1 = type
+  case "$1" in
+    skill) echo SKILL.md ;; agent) echo AGENT.md ;; workflow) echo WORKFLOW.md ;;
+    team) echo TEAM.md ;; playbook) echo PLAYBOOK.md ;;
+  esac
+}
+
+type_for() { # infer artifact type from path under ROOT
+  case "${1#"$ROOT"/}" in
+    skills/*) echo skill ;; agents/*) echo agent ;; workflows/*) echo workflow ;;
+    teams/*) echo team ;; playbooks/*) echo playbook ;;
+  esac
+}
+
+for d in $(list_artifacts); do
+  rel=${d#"$ROOT"/}
+  t=$(type_for "$d")
+  name=$(basename "$d")
+  spec=$(spec_for "$t")
+
+  # kebab-case folder name
+  if ! printf '%s' "$name" | grep -Eq "$kebab"; then
+    err "$rel: folder name '$name' is not kebab-case"; errors=$((errors+1))
+  fi
+
+  # required files
+  for f in "$spec" README.md metadata.yaml CHANGELOG.md; do
+    [ -f "$d/$f" ] || { err "$rel: missing $f"; errors=$((errors+1)); }
+  done
+  if [ "$t" = skill ] && [ ! -d "$d/tests" ]; then
+    err "$rel: missing tests/ directory"; errors=$((errors+1))
+  fi
+  if [ "$t" = skill ] && [ ! -f "$d/IMPLEMENTATION.md" ]; then
+    err "$rel: missing IMPLEMENTATION.md (required for skills)"; errors=$((errors+1))
+  fi
+
+  # folder name == metadata name (grep, no YAML parse needed)
+  mname=$(grep -E '^name:' "$d/metadata.yaml" 2>/dev/null | head -1 | sed 's/^name:[[:space:]]*//; s/[[:space:]]*$//')
+  if [ -n "$mname" ] && [ "$mname" != "$name" ]; then
+    err "$rel: metadata name '$mname' != folder '$name'"; errors=$((errors+1))
+  fi
+done
+
+if [ "$errors" -gt 0 ]; then
+  err "lint: $errors problem(s)"
+  exit 1
+fi
+ok "lint: OK"

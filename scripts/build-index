@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# Build the catalog index (index.json) from every artifact's metadata.yaml.
+# Needs YAML parsing -> uses the Python adapter.
+. "$(dirname -- "$0")/lib/common.sh"
+
+PY=$(find_python) || {
+  err "build-index: Python 3 is required to build the index (parses metadata.yaml)."
+  exit 2
+}
+exec "$PY" "$ROOT/scripts/lib/factory.py" index

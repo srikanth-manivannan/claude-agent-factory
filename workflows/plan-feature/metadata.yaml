@@ -1,0 +1,19 @@
+# Validated against /shared/schemas/workflow.schema.yaml.
+name: plan-feature
+title: Plan Feature
+description: Use this workflow to turn a feature goal into a reviewed, decision-recorded plan.
+type: workflow
+tags: [workflow, planning, architecture]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  skills:
+    - { name: architecture/tradeoff-analyzer, min_version: 0.1.0 }
+    - { name: architecture/system-design-reviewer, min_version: 0.1.0 }
+

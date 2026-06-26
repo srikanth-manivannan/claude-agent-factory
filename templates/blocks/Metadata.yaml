@@ -1,0 +1,53 @@
+# ============================================================================
+# METADATA BLOCK  (metadata.yaml)
+# Mirrors templates/_meta/metadata.yaml. Technology-agnostic: the tech profile
+# is declared in data, never hardcoded in prose. Schema of record: shared/schemas/.
+# Copy the fields relevant to your artifact "type"; replace all {{PLACEHOLDERS}}.
+# ============================================================================
+
+# --- Identity ---------------------------------------------------------------
+name: {{NAME}}
+title: {{TITLE}}
+description: {{DESCRIPTION}}
+type: {{TYPE}}                 # skill | agent | workflow | team | prompt | example
+
+# --- Classification ---------------------------------------------------------
+category: {{CATEGORY}}         # required for skills; omit otherwise
+tags: {{TAGS}}
+
+# --- Technology profile (this is how a template "supports any technology") ---
+# Describe the target stack as DATA. Any/all may be "n/a" for tech-neutral artifacts.
+tech_profile:
+  technology: {{TECHNOLOGY}}   # broad target, e.g. "a REST API"
+  language: {{LANGUAGE}}       # e.g. "python" | "n/a"
+  stack: {{STACK}}            # e.g. "react" | "n/a"
+  toolchain: {{TOOLCHAIN}}    # e.g. "npm" | "n/a"
+  domain: {{DOMAIN}}          # e.g. "testing"
+
+# --- Versioning — VISION §12 ------------------------------------------------
+version: {{VERSION}}
+min_standard: {{MIN_STANDARD}}
+status: active                 # active | deprecated
+# deprecated_by: <name>        # required when status: deprecated
+
+# --- Runtime seam — ARCHITECTURE §19 ----------------------------------------
+runtime: {{RUNTIME}}           # "claude" today; pluggable later
+
+# --- Provenance -------------------------------------------------------------
+license: MIT
+author: {{AUTHOR}}
+created: "{{DATE}}"          # quote dates: bare YAML dates parse as date objects, failing schema
+updated: "{{DATE}}"
+
+# --- Composition (points DOWN the ladder only; validated by tests/links/) ----
+dependencies: []               # skills: usually empty
+# uses_skills:   [{ name: {{CATEGORY}}/{{SKILL}}, min_version: {{VERSION}} }]   # agents
+# composes:                                                                    # workflows/teams
+#   agents:    [{ name: {{AGENT}}, min_version: {{VERSION}} }]
+#   skills:    [{ name: {{CATEGORY}}/{{SKILL}}, min_version: {{VERSION}} }]
+#   workflows: [{ name: {{WORKFLOW}}, min_version: {{VERSION}} }]
+
+# --- Advanced skills only ---------------------------------------------------
+# requires:
+#   scripts_runtime: sh         # keep portable (ARCHITECTURE §9)
+#   binaries: []

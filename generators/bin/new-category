@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+# Scaffold a new skill category: skills/<name>/README.md (the category index).
+# Usage: new-category <name> ["charter sentence"]
+. "$(dirname -- "$0")/../lib/common.sh"
+
+[ "$#" -ge 1 ] || die "usage: new-category <name> [\"charter\"]"
+NAME=$1; CHARTER=${2:-"TODO: one-line charter — what belongs in this category."}
+require_kebab "$NAME"
+DEST="$ROOT/skills/$NAME"
+[ -f "$DEST/README.md" ] && die "category '$NAME' already exists."
+mkdir -p "$DEST"
+TITLE=$(titlecase "$NAME")
+
+cat > "$DEST/README.md" <<EOF
+# $TITLE Skills
+
+> $CHARTER Charter source: [/TAXONOMY.md](../../TAXONOMY.md). All skills conform to
+> [/standards/](../../standards/) and validate against
+> [skill.schema.yaml](../../shared/schemas/skill.schema.yaml).
+
+| Skill | Does | Priority | Status |
+|-------|------|----------|--------|
+| _none yet_ | — | — | add with \`generators/bin/new-skill $NAME <skill>\` |
+
+> Skill anatomy: [/skills/architecture/README.md](../architecture/README.md).
+EOF
+
+ok "Created category: skills/$NAME/ (README index)"
+say "Next: 1) add the category to /TAXONOMY.md  2) generators/bin/new-skill $NAME <skill>"

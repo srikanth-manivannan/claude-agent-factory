@@ -1,0 +1,18 @@
+# Code owners — auto-requests review when matching paths change.
+# As the project grows, add per-category area maintainers here
+# (the structural mechanism behind VISION §9 "area maintainers").
+
+# Default owner for everything
+*                       @srikanth-manivannan
+
+# Framework core (higher bar — changes here affect every artifact)
+/standards/             @srikanth-manivannan
+/shared/schemas/        @srikanth-manivannan
+/scripts/               @srikanth-manivannan
+/generators/            @srikanth-manivannan
+/FACTORY.md             @srikanth-manivannan
+/ARCHITECTURE.md        @srikanth-manivannan
+/VISION.md              @srikanth-manivannan
+
+# Per-category skill ownership (example — extend as maintainers join)
+# /skills/security/     @some-security-maintainer

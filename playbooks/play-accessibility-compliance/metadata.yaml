@@ -1,0 +1,21 @@
+# Validated against /shared/schemas/playbook.schema.yaml.
+name: play-accessibility-compliance
+title: Accessibility Compliance Pipeline
+description: Use this playbook to bring a product to WCAG AA compliance and keep it there through release.
+type: playbook
+tags: [playbook, pipeline, accessibility, wcag, compliance]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  teams:
+    - { name: team-frontend, min_version: 0.1.0 }
+  workflows:
+    - { name: accessibility-audit, min_version: 0.1.0 }
+    - { name: review-pr, min_version: 0.1.0 }
+    - { name: release-pipeline, min_version: 0.1.0 }

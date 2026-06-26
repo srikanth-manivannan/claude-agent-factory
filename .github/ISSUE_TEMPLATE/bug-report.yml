@@ -1,0 +1,54 @@
+name: 🐞 Bug report
+description: Something in the framework or a skill isn't working as documented.
+title: "[bug] <short description>"
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report! For **security** issues, do not use this form — see
+        [SECURITY.md](https://github.com/srikanth-manivannan/claude-agent-factory/blob/main/SECURITY.md).
+  - type: input
+    id: artifact
+    attributes:
+      label: Affected artifact / area
+      description: e.g. `skills/architecture/tradeoff-analyzer`, `scripts/validate`, a generator
+      placeholder: skills/<category>/<name> or scripts/<name>
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `sh scripts/validate`
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: validate-output
+    attributes:
+      label: scripts/validate output (if relevant)
+      render: text
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: OS, shell, Python version (if used)
+      placeholder: "Windows 11 / Git Bash / Python 3.12"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I searched existing issues and this isn't a duplicate.
+          required: true
+        - label: This is not a security vulnerability (those go to SECURITY.md).
+          required: true

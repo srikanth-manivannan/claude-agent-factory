@@ -1,0 +1,24 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: agent-scaffold
+title: Agent Scaffold
+description: Use this to scaffold a production-ready agent with a defined role, typed tools, memory, guardrails, and evals.
+type: skill
+category: agentic-ai
+tags: [agentic-ai, agent, tools, memory, guardrails, evals]
+tech_profile:
+  technology: LLM agent
+  language: any
+  stack: any agent runtime
+  toolchain: any
+  domain: agentic-ai
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+maturity: gold
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies:
+  - { name: ai/prompt-engineer, min_version: 0.1.0 }

@@ -1,0 +1,92 @@
+#!/usr/bin/env sh
+# Scaffold a playbook: playbooks/<name>/ (PLAYBOOK.md + README + metadata + CHANGELOG).
+# A playbook composes teams + workflows (schema: composes.teams >=1, workflows >=1).
+# Usage: new-playbook <name>            (name conventionally prefixed play-)
+. "$(dirname -- "$0")/../lib/common.sh"
+
+[ "$#" -ge 1 ] || die "usage: new-playbook <name>   (convention: play-<objective>)"
+NAME=$1; require_kebab "$NAME"
+case "$NAME" in play-*) ;; *) warn "convention: playbooks are named play-<objective> (see /standards/naming.md)";; esac
+DEST="$ROOT/playbooks/$NAME"; ensure_new_dir "$DEST"
+TITLE=$(titlecase "$NAME"); VER=0.1.0; MS=$(min_standard); DATE=$(today); AUTH=$(author)
+DESC="Use this playbook to TODO describe the complete engineering outcome it delivers."
+
+cat > "$DEST/PLAYBOOK.md" <<EOF
+---
+name: $NAME
+description: $DESC
+version: $VER
+runtime: claude
+min_standard: $MS
+license: MIT
+tags: [playbook]
+---
+
+# $TITLE (Playbook)
+
+> $DESC
+
+The top tier: composes **teams + workflows** for a complete outcome (/standards/architecture.md).
+
+## Objective
+TODO.
+
+## Composition
+- **Teams:** TODO (>=1)
+- **Workflows:** TODO (>=1)
+
+## Operating guide
+1. TODO.
+
+## Success criteria
+- TODO.
+EOF
+
+cat > "$DEST/metadata.yaml" <<EOF
+# Validated against /shared/schemas/playbook.schema.yaml.
+name: $NAME
+title: $TITLE
+description: $DESC
+type: playbook
+tags: [playbook]
+version: $VER
+min_standard: $MS
+status: active
+runtime: claude
+license: MIT
+author: "$AUTH"
+created: "$DATE"
+updated: "$DATE"
+composes:
+  teams:
+    - { name: TODO-replace-team, min_version: $VER }
+  workflows:
+    - { name: TODO-replace-workflow, min_version: $VER }
+EOF
+
+cat > "$DEST/README.md" <<EOF
+# $TITLE (Playbook)
+
+> $DESC
+
+**Version:** $VER · **Runtime:** claude · **License:** MIT
+
+## What it does
+TODO: composes teams + workflows into a complete outcome.
+
+## Version history
+See [CHANGELOG.md](CHANGELOG.md).
+EOF
+
+cat > "$DEST/CHANGELOG.md" <<EOF
+# Changelog — $TITLE (Playbook)
+
+## [Unreleased]
+
+## [$VER] - $DATE
+### Added
+- Initial release of the \`$NAME\` playbook (scaffolded).
+EOF
+
+ok "Created playbook: playbooks/$NAME"
+say "Next: 1) replace TODO team/workflow refs with real ids  2) run: scripts/validate"

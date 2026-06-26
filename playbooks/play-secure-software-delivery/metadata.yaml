@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/playbook.schema.yaml.
+name: play-secure-software-delivery
+title: Secure Software Delivery Pipeline
+description: Use this playbook to deliver software through a security-first pipeline with gated release.
+type: playbook
+tags: [playbook, pipeline, security, sdlc, enterprise]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  teams:
+    - { name: team-security, min_version: 0.1.0 }
+  workflows:
+    - { name: build-feature, min_version: 0.1.0 }
+    - { name: security-audit, min_version: 0.1.0 }
+    - { name: review-pr, min_version: 0.1.0 }
+    - { name: release-pipeline, min_version: 0.1.0 }
+    - { name: incident-response, min_version: 0.1.0 }

@@ -1,0 +1,62 @@
+# ============================================================================
+# CANONICAL METADATA TEMPLATE  (metadata.yaml)
+# ----------------------------------------------------------------------------
+# The machine-readable descriptor every artifact carries. Consumed by tests/,
+# generators/, and the catalog index. Schema of record lives in shared/schemas/
+# and MUST agree with this file. This template documents EVERY field; copy only
+# the fields relevant to your artifact type (see "type" below).
+#
+# Placeholder syntax: {{DOUBLE_BRACE}} — all must be replaced before validation.
+# ============================================================================
+
+# --- Identity (all artifacts) -----------------------------------------------
+name: {{NAME}}                 # kebab-case; MUST equal the folder name + spec frontmatter
+title: {{TITLE}}               # human-readable title
+description: {{DESCRIPTION}}    # ONE action-oriented sentence ("Use this to…")
+type: {{TYPE}}                 # skill | agent | workflow | team | prompt | example
+
+# --- Classification ---------------------------------------------------------
+category: {{CATEGORY}}         # REQUIRED for skills; omit for non-categorized types
+tags: {{TAGS}}                 # discovery aids, e.g. [testing, http]
+
+# --- Versioning (all artifacts) — VISION §12 --------------------------------
+version: {{VERSION}}           # per-artifact SemVer
+min_standard: {{MIN_STANDARD}} # minimum standards/ version this artifact targets
+status: active                 # active | deprecated
+# deprecated_by: <name>        # required when status: deprecated (the replacement)
+
+# --- Runtime seam — ARCHITECTURE §19 ----------------------------------------
+runtime: {{RUNTIME}}           # "claude" today; pluggable later. Maps to shared/runtime/<runtime>/
+
+# --- Provenance -------------------------------------------------------------
+license: MIT                   # inbound = outbound (VISION §13)
+author: {{AUTHOR}}
+created: "{{DATE}}"           # ISO date (quote it — bare YAML dates parse as date objects, failing schema)
+updated: "{{DATE}}"          # ISO date (quoted)
+
+# --- Composition / dependencies (points DOWN the ladder only) ---------------
+# Validated by tests/links/: every reference must exist at the declared version.
+# Use the block that matches the artifact type; delete the rest.
+
+# skills: usually no dependencies
+dependencies: []               # [{ name: <category>/<skill>, min_version: x.y.z }]
+
+# agents:
+# uses_skills:
+#   - { name: {{CATEGORY}}/{{SKILL}}, min_version: {{VERSION}} }
+
+# workflows:
+# composes:
+#   agents:  [{ name: {{AGENT}}, min_version: {{VERSION}} }]
+#   skills:  [{ name: {{CATEGORY}}/{{SKILL}}, min_version: {{VERSION}} }]
+
+# teams:
+# composes:
+#   agents:    [...]
+#   workflows: [...]
+#   skills:    [...]
+
+# --- Advanced skills only ---------------------------------------------------
+# requires:
+#   scripts_runtime: sh         # sh | python | node — keep portable (ARCHITECTURE §9)
+#   binaries: []                # external CLI tools assumed by helper scripts

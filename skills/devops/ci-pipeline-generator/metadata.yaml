@@ -1,0 +1,24 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: ci-pipeline-generator
+title: CI Pipeline Generator
+description: Use this to generate a CI pipeline that builds, tests, and validates a project on every change.
+type: skill
+category: devops
+tags: [devops, ci, pipeline, automation, quality-gate]
+tech_profile:
+  technology: CI/CD
+  language: any
+  stack: any
+  toolchain: any
+  domain: devops
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+maturity: gold
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies:
+  - { name: testing/unit-test-generator, min_version: 0.1.0 }

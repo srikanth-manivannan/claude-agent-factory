@@ -1,0 +1,18 @@
+# Validated against /shared/schemas/agent.schema.yaml.
+name: platform-engineer
+title: Platform Engineer
+description: Use this agent to provision infrastructure and stand up CI/CD and project foundations.
+type: agent
+tags: [agent, platform, cloud, devops]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+uses_skills:
+  - { name: cloud/cloud-resource-provisioner, min_version: 0.1.0 }
+  - { name: devops/ci-pipeline-generator, min_version: 0.1.0 }
+  - { name: developer-experience/project-scaffolder, min_version: 0.1.0 }

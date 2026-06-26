@@ -1,0 +1,18 @@
+# Validated against /shared/schemas/agent.schema.yaml.
+name: api-architect
+title: API Architect
+description: Use this agent to design and review API-centric system architecture before implementation.
+type: agent
+tags: [agent, architecture, api, backend]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+uses_skills:
+  - { name: architecture/system-design-reviewer, min_version: 0.1.0 }
+  - { name: backend/openapi-designer, min_version: 0.1.0 }
+  - { name: architecture/tradeoff-analyzer, min_version: 0.1.0 }

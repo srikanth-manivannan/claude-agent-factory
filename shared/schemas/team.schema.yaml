@@ -1,0 +1,31 @@
+# =============================================================================
+# team.schema.yaml — a coordinated collection of agents.
+# Extends metadata.schema.yaml. See /standards/architecture.md.
+# =============================================================================
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://claude-agent-factory/shared/schemas/team.schema.yaml"
+title: Team Metadata
+description: Metadata for a team (teams/team-<domain>/metadata.yaml).
+
+allOf:
+  - $ref: "metadata.schema.yaml"
+
+properties:
+  type:
+    const: team
+  composes:
+    description: The agents this team coordinates (≥1).
+    type: object
+    properties:
+      agents:
+        type: array
+        minItems: 1
+        items: { $ref: "metadata.schema.yaml#/$defs/reference" }
+    required: [agents]
+    additionalProperties: false
+
+required:
+  - type
+  - composes
+
+unevaluatedProperties: false

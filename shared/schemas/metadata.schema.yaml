@@ -1,0 +1,125 @@
+# =============================================================================
+# metadata.schema.yaml — BASE schema shared by every artifact type.
+# JSON Schema (draft 2020-12), authored in YAML for readability.
+# The artifact schemas (skill/agent/team/workflow/playbook) extend this via allOf.
+# Human companion: /standards/metadata.md   Enforced by: scripts/validate + CI.
+# =============================================================================
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://claude-agent-factory/shared/schemas/metadata.schema.yaml"
+title: Artifact Metadata (base)
+description: >-
+  Common metadata fields carried by every artifact's metadata.yaml. Artifact-type
+  schemas reference this and add their composition fields.
+type: object
+
+# Reusable definitions referenced across all schemas.
+$defs:
+  semver:
+    description: SemVer MAJOR.MINOR.PATCH (see /standards/versioning.md).
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  slug:
+    description: kebab-case identifier (see /standards/naming.md).
+    type: string
+    pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+  techProfileField:
+    description: A tech-profile value; may be "n/a" for technology-neutral artifacts.
+    type: string
+    minLength: 1
+  reference:
+    description: A versioned reference to another artifact (name + minimum version).
+    type: object
+    properties:
+      name: { type: string, minLength: 1 }
+      min_version: { $ref: "#/$defs/semver" }
+    required: [name, min_version]
+    additionalProperties: false
+
+properties:
+  # --- Identity ---
+  name:
+    description: kebab-case; MUST equal the folder name and spec frontmatter name.
+    $ref: "#/$defs/slug"
+  title:
+    description: Human-readable title.
+    type: string
+    minLength: 1
+  description:
+    description: One action-oriented sentence ("Use this to…"). See /standards/naming.md.
+    type: string
+    minLength: 1
+  type:
+    description: The artifact tier (see /standards/architecture.md).
+    enum: [skill, agent, team, workflow, playbook, prompt, example]
+
+  # --- Classification ---
+  category:
+    description: Parent category slug. REQUIRED for skills (see skill.schema.yaml).
+    $ref: "#/$defs/slug"
+  tags:
+    description: Discovery aids.
+    type: array
+    items: { type: string }
+
+  # --- Technology profile (supports "any technology" as data) ---
+  tech_profile:
+    description: Target stack described as data; any field may be "n/a".
+    type: object
+    properties:
+      technology: { $ref: "#/$defs/techProfileField" }
+      language:   { $ref: "#/$defs/techProfileField" }
+      stack:      { $ref: "#/$defs/techProfileField" }
+      toolchain:  { $ref: "#/$defs/techProfileField" }
+      domain:     { $ref: "#/$defs/techProfileField" }
+    additionalProperties: false
+
+  # --- Versioning (see /standards/versioning.md) ---
+  version:      { $ref: "#/$defs/semver" }
+  min_standard: { $ref: "#/$defs/semver" }
+  status:
+    enum: [active, deprecated, draft]
+    default: active
+  maturity:
+    description: Content depth — gold (production reference), baseline (complete but concise), draft (planned).
+    enum: [gold, baseline, draft]
+  deprecated_by:
+    description: Replacement artifact name; REQUIRED when status is deprecated.
+    type: string
+
+  # --- Runtime seam (see /standards/architecture.md, ARCHITECTURE §19) ---
+  runtime:
+    description: Pluggable runtime. "claude" today.
+    type: string
+    enum: [claude]
+
+  # --- Provenance ---
+  license:
+    description: MIT — inbound = outbound (VISION §13).
+    const: MIT
+  author: { type: string, minLength: 1 }
+  created: { type: string, format: date }
+  updated: { type: string, format: date }
+
+required:
+  - name
+  - title
+  - description
+  - type
+  - version
+  - min_standard
+  - runtime
+  - license
+  - author
+  - created
+  - updated
+
+# When deprecated, a replacement must be named.
+allOf:
+  - if:
+      properties: { status: { const: deprecated } }
+      required: [status]
+    then:
+      required: [deprecated_by]
+
+# Base does not forbid extra props — artifact schemas add composition fields and
+# close the object with unevaluatedProperties:false.

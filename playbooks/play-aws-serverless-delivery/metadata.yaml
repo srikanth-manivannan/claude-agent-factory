@@ -1,0 +1,22 @@
+# Validated against /shared/schemas/playbook.schema.yaml.
+name: play-aws-serverless-delivery
+title: AWS Serverless Delivery Pipeline
+description: Use this playbook to deliver a serverless workload to a cloud platform with operations in place.
+type: playbook
+tags: [playbook, pipeline, cloud, serverless, platform]
+version: 0.1.0
+min_standard: 0.1.0
+status: active
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+composes:
+  teams:
+    - { name: team-platform, min_version: 0.1.0 }
+  workflows:
+    - { name: build-feature, min_version: 0.1.0 }
+    - { name: database-migration, min_version: 0.1.0 }
+    - { name: release-pipeline, min_version: 0.1.0 }
+    - { name: incident-response, min_version: 0.1.0 }

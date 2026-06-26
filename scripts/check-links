@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+# Verify composition references resolve and the dependency graph is acyclic.
+# Reference resolution needs YAML parsing -> uses the Python adapter.
+# Pending references (type-valid target not yet built) are warnings; cycles fail.
+. "$(dirname -- "$0")/lib/common.sh"
+
+PY=$(find_python) || {
+  warn "check-links: Python not found — skipping reference resolution."
+  warn "Install Python 3 to enable link checking. (basic checks still run in scripts/lint)"
+  exit 0
+}
+exec "$PY" "$ROOT/scripts/lib/factory.py" links

@@ -1,0 +1,23 @@
+# Validated against /shared/schemas/skill.schema.yaml. Companion: /standards/metadata.md.
+name: keyboard-nav-checker
+title: Keyboard Nav Checker
+description: Use this to verify and fix keyboard operability and focus order.
+type: skill
+category: accessibility
+tags: [accessibility]
+tech_profile:
+  technology: any
+  language: any
+  stack: any
+  toolchain: any
+  domain: accessibility
+version: 0.1.0
+min_standard: 0.1.0
+status: draft
+maturity: baseline
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-26"
+updated: "2026-06-26"
+dependencies: []

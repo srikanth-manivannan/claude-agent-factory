@@ -1,0 +1,19 @@
+name: release-pipeline
+title: Release Pipeline
+description: Cut, verify, deploy, and announce a versioned release end to end.
+type: workflow
+version: 0.1.0
+min_standard: 0.1.0
+runtime: claude
+license: MIT
+author: "@claude-agent-factory"
+created: "2026-06-25"
+updated: "2026-06-25"
+tags: [release, ci-cd, deployment, devops]
+status: active
+composes:
+  skills:
+    - { name: devops/release-automator, min_version: 0.1.0 }
+    - { name: documentation/changelog-generator, min_version: 0.1.0 }
+    - { name: devops/ci-pipeline-generator, min_version: 0.1.0 }
+    - { name: devops/cd-deployment-builder, min_version: 0.1.0 }
