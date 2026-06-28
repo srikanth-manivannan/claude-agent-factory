@@ -131,6 +131,7 @@ Deepening baseline skills toward gold is the most welcome contribution
 - ✅ [Validation & CI](docs/guides/validation-and-ci.md)
 - 🤝 [Contributing](CONTRIBUTING.md) · [Code of Conduct](CODE_OF_CONDUCT.md)
 - ❓ [FAQ](docs/FAQ.md) · 🔒 [Security](SECURITY.md)
+- 💬 [Discussions](https://github.com/srikanth-manivannan/claude-agent-factory/discussions) — questions, ideas, show & tell
 
 ## Contributing
 
